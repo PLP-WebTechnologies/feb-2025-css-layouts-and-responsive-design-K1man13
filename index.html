@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KYM CREATES</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+            max-width: 100% !important;
+        }
+
+        /* Navigation Bar using Flexbox */
+        nav {
+            background-color: #1a1a1a;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav .logo {
+            color: #fff;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #ff6f61;
+        }
+
+        /* Main Grid Layout */
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 3fr 1fr;
+            grid-template-rows: auto 1fr auto;
+            gap: 1.5rem;
+            padding: 2rem;
+            min-height: calc(100vh - 70px);
+            grid-template-areas:
+                "header header header"
+                "sidebar main aside"
+                "footer footer footer";
+        }
+
+        header {
+            grid-area: header;
+            background-color: #fff;
+            padding: 3rem;
+            text-align: center;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        main {
+            grid-area: main;
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .sidebar {
+            grid-area: sidebar;
+            background-color: #f9f9f9;
+            padding: 2rem;
+            border-radius: 8px;
+        }
+
+        .aside {
+            grid-area: aside;
+            background-color: #f9f9f9;
+            padding: 2rem;
+            border-radius: 8px;
+        }
+
+        footer {
+            grid-area: footer;
+            background-color: #1a1a1a;
+            color: #fff;
+            text-align: center;
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+        }
+
+        h1, h2, h3 {
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            width: 100%;
+        }
+
+        .portfolio-item {
+            background-color: #f9f9f9;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            padding: 0.8rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .contact-form button {
+            padding: 0.8rem;
+            background-color: #ff6f61;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .contact-form button:hover {
+            background-color: #e55a50;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Adjust main section for portfolio to span full width on Home page */
+        #home main {
+            grid-column: 1 / -1; /* Span all columns */
+        }
+
+        /* Mobile-first Media Queries */
+        @media (max-width: 600px) {
+            .container {
+                grid-template-columns: 1fr;
+                grid-template-areas:
+                    "header"
+                    "main"
+                    "sidebar"
+                    "aside"
+                    "footer";
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+                text-align: center;
+            }
+
+            header, main, .sidebar, .aside, footer {
+                padding: 1rem;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            #home main {
+                grid-column: 1 / -1; /* Ensure full width on mobile */
+            }
+        }
+
+        @media (min-width: 601px) and (max-width: 1024px) {
+            .container {
+                grid-template-columns: 1fr 2fr;
+                grid-template-areas:
+                    "header header"
+                    "sidebar main"
+                    "aside aside"
+                    "footer footer";
+            }
+
+            nav ul {
+                flex-direction: row;
+            }
+
+            header, main, .sidebar, .aside, footer {
+                padding: 1.5rem;
+            }
+
+            #home main {
+                grid-column: 1 / -1; /* Ensure full width on tablet */
+            }
+        }
+
+        @media (min-width: 1025px) {
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+
+            #home main {
+                grid-column: 1 / -1; /* Ensure full width on desktop */
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="kym.png">Kym Creates Designs</div>
+        <ul>
+            <li><a href="#home" onclick="showPage('home')">Home</a></li>
+            <li><a href="#about" onclick="showPage('about')">About</a></li>
+            <li><a href="#services" onclick="showPage('services')">Services</a></li>
+            <li><a href="#contact" onclick="showPage('contact')">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <!-- Home Page -->
+        <div id="home" class="page active">
+            <header>
+                <h1>Welcome to Kym Creates Designs</h1>
+                <p>Creative Graphic Design Solutions for Your Brand</p>
+            </header>
+            <main>
+                <h2>Portfolio Highlights</h2>
+                <div class="portfolio-grid">
+                    <div class="portfolio-item">
+                        <img src="IMG-20241007-WA0000(1).jpg" alt="Project 1">
+                        <h3>Project One</h3>
+                        <p>Branding for a local event</p>
+                    </div>
+                    <div class="portfolio-item">
+                        <img src="Be the reason someone smiles_20240808_091906_0001.png" alt="Project 2">
+                        <h3>Project Two</h3>
+                        <p>T-shirt Design for an Organization</p>
+                    </div>
+                    <div class="portfolio-item">
+                        <img src="IMG-20240717-WA0068.jpg" alt="Project 3">
+                        <h3>Project Three</h3>
+                        <p>Poster design for an event</p>
+                    </div>
+                </div>
+            </main>
+            <div class="sidebar">
+                <h3>Quick Links</h3>
+                <p><a href="#services">View Our Services</a></p>
+                <p><a href="#contact">Get in Touch</a></p>
+            </div>
+            <div class="aside">
+                <h3>Testimonials</h3>
+                <p>"Kym's designs transformed our brand!" - Client A</p>
+                <p>"Professional and creative!" - Client B</p>
+            </div>
+            <footer>
+                <p>© 2025 kymcreates. All rights reserved.</p>
+            </footer>
+        </div>
+
+        <!-- About Page -->
+        <div id="about" class="page">
+            <header>
+                <h1>About Kym</h1>
+                <p>Passionate Graphic Designer with 10+ Years of Experience</p>
+            </header>
+            <main>
+                <h2>My Story</h2>
+                <img src="kym.png" alt="KYM CREATES">
+                <p>Hi, I'm Kym Creates, a graphic designer specializing in branding, web design, and print media. With a keen eye for detail and a passion for creativity, I help businesses bring their visions to life.</p>
+                <p>My journey began over a decade ago, and since then, I've worked with clients across various industries, delivering unique and impactful designs.</p>
+            </main>
+            <div class="sidebar">
+                <h3>Skills</h3>
+                <p>Branding</p>
+                <p>UI/UX Design</p>
+                <p>Print Media</p>
+            </div>
+            <div class="aside">
+                <h3>Awards</h3>
+                <p>Best Designer 2023</p>
+                <p>Creative Excellence 2022</p>
+            </div>
+            <footer>
+                <p>© 2025 kymcreates. All rights reserved.</p>
+            </footer>
+        </div>
+
+        <!-- Services Page -->
+        <div id="services" class="page">
+            <header>
+                <h1>Our Services</h1>
+                <p>Comprehensive Design Solutions for Your Needs</p>
+            </header>
+            <main>
+                <h2>What We Offer</h2>
+                <div class="portfolio-grid">
+                    <div class="portfolio-item">
+                        <h3>Branding</h3>
+                        <p>Logo design, brand identity, and style guides.</p>
+                    </div>
+                    <div class="portfolio-item">
+                        <h3>Web Design</h3>
+                        <p>Responsive websites and UI/UX design.</p>
+                    </div>
+                    <div class="portfolio-item">
+                        <h3>Print Media</h3>
+                        <p>Posters, brochures, and business cards, T-shirts, caps, cups, hoodies.</p>
+                    </div>
+                </div>
+            </main>
+            <div class="sidebar">
+                <h3>Pricing</h3>
+                <p>Contact us for a custom quote!</p>
+            </div>
+            <div class="aside">
+                <h3>Process</h3>
+                <p>1. Consultation</p>
+                <p>2. Design Draft</p>
+                <p>3. Final Delivery</p>
+            </div>
+            <footer>
+                <p>© 2025 kymcreates. All rights reserved.</p>
+            </footer>
+        </div>
+
+        <!-- Contact Page -->
+        <div id="contact" class="page">
+            <header>
+                <h1>Contact Us</h1>
+                <p>Let's Create Something Amazing Together</p>
+            </header>
+            <main>
+                <h2>Get in Touch</h2>
+                <div class="contact-form">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <textarea placeholder="Your Message" rows="5" required></textarea>
+                    <button type="submit">Send Message</button>
+                </div>
+            </main>
+            <div class="sidebar">
+                <h3>Contact Info</h3>
+                <p>Email: contact@kymcreates.com</p>
+                <p>Phone: +254 791 742976</p>
+            </div>
+            <div class="aside">
+                <h3>Follow Us</h3>
+                <p><a href="#">Instagram</a></p>
+                <p><a href="#">Behance</a></p>
+            </div>
+            <footer>
+                <p>© 2025 kymcreates. All rights reserved.</p>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+        }
+    </script>
+</body>
+</html>
